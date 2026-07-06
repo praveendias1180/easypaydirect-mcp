@@ -64,7 +64,65 @@ claude mcp add easypaydirect \
   -- npx -y easypaydirect-mcp
 ```
 
-## 6. Ask questions
+## 6. Connect to Cursor
+
+Add this server to Cursor's MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "easypaydirect": {
+      "command": "npx",
+      "args": ["-y", "easypaydirect-mcp"],
+      "env": {
+        "NMI_SECURITY_KEY": "your_read_only_security_key",
+        "NMI_API_URL": "https://secure.nmi.com"
+      }
+    }
+  }
+}
+```
+
+## 7. Connect to Windsurf
+
+Use the same MCP server definition in Windsurf's MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "easypaydirect": {
+      "command": "npx",
+      "args": ["-y", "easypaydirect-mcp"],
+      "env": {
+        "NMI_SECURITY_KEY": "your_read_only_security_key",
+        "NMI_API_URL": "https://secure.nmi.com"
+      }
+    }
+  }
+}
+```
+
+## 8. Connect to VS Code
+
+For VS Code MCP support, add:
+
+```json
+{
+  "servers": {
+    "easypaydirect": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "easypaydirect-mcp"],
+      "env": {
+        "NMI_SECURITY_KEY": "your_read_only_security_key",
+        "NMI_API_URL": "https://secure.nmi.com"
+      }
+    }
+  }
+}
+```
+
+## 9. Ask questions
 
 - "Look up transaction 1234567890."
 - "Find failed card transactions between Jan 1 and Jan 7, 2026."

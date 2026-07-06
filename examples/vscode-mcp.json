@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "easypaydirect": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "easypaydirect-mcp"],
+      "env": {
+        "NMI_SECURITY_KEY": "your_read_only_security_key",
+        "NMI_API_URL": "https://secure.nmi.com"
+      }
+    }
+  }
+}
