@@ -55,10 +55,10 @@ precision).
    model knows how to use it.
 3. Map inputs to Query API params and call `client.query(...)`.
 4. Register it in `src/index.ts`.
-5. Document it in [`tools.md`](tools.md) and here.
+5. Document it in [`tools.md`](tools.html) and here.
 
 Keep new tools **read-only** (Query API only). Write support is a deliberate,
-separately gated future effort — see [`security.md`](security.md).
+separately gated future effort — see [`security.md`](security.html).
 
 ## Reference
 

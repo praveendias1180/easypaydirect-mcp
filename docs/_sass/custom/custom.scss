@@ -1,0 +1,255 @@
+// ---------------------------------------------------------------------------
+// easypaydirect-mcp — visual polish on top of just-the-docs
+// ---------------------------------------------------------------------------
+
+// Fonts (loaded in _includes/head_custom.html)
+$font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+
+body {
+  font-family: $font-sans;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+code, kbd, pre, samp, .highlight, tt {
+  font-family: $font-mono;
+}
+
+// --- Headings ---------------------------------------------------------------
+h1, h2, h3, h4, h5, h6, .text-alpha {
+  font-family: $font-sans;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+.main-content h1 { font-size: 1.9rem !important; line-height: 1.2; }
+.main-content h2 {
+  font-size: 1.4rem !important;
+  margin-top: 2.2rem !important;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid $border-color;
+}
+.main-content h3 { font-size: 1.1rem !important; margin-top: 1.6rem !important; }
+
+.main-content { line-height: 1.65; }
+.main-content p { max-width: 46rem; }
+
+// --- Sidebar ----------------------------------------------------------------
+.side-bar { border-right: 1px solid $border-color; }
+.site-header { border-bottom: 1px solid $border-color; }
+.site-title { padding-top: 1rem; padding-bottom: 1rem; }
+.site-logo { height: 2rem; }
+
+.nav-list .nav-list-item .nav-list-link {
+  border-radius: 6px;
+  transition: background-color 0.12s ease, color 0.12s ease;
+  &:hover { background-color: rgba(81, 69, 224, 0.07); }
+  &.active {
+    background-color: rgba(81, 69, 224, 0.10);
+    font-weight: 600;
+    &::before { background-color: $link-color; }
+  }
+}
+
+// --- Links ------------------------------------------------------------------
+.main-content a {
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(81, 69, 224, 0.35);
+}
+
+// --- Buttons ----------------------------------------------------------------
+.btn {
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(22, 25, 42, 0.06);
+  transition: transform 0.08s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  &:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(81, 69, 224, 0.18); }
+}
+.btn-primary {
+  background-image: linear-gradient(135deg, #6a5cf0 0%, #4b40cf 100%) !important;
+  border: none;
+}
+
+// --- Inline & block code ----------------------------------------------------
+.main-content code {
+  color: #4038c4;
+  background-color: #f2f1fd;
+  border: 1px solid #e6e4fb;
+  border-radius: 5px;
+  padding: 0.12em 0.4em;
+  font-size: 0.82em;
+}
+.main-content pre.highlight,
+.main-content div.highlighter-rouge {
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(22, 25, 42, 0.04);
+}
+.main-content pre.highlight code,
+.main-content div.highlighter-rouge code {
+  color: inherit; background: none; border: none; padding: 0;
+}
+
+// --- Tables -----------------------------------------------------------------
+.main-content table {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px $border-color;
+  border: none;
+}
+.main-content thead th {
+  background-color: #f7f7fc;
+  font-weight: 600;
+  border-bottom: 1px solid $border-color;
+}
+.main-content td, .main-content th { border: none; border-bottom: 1px solid $border-color; }
+
+// --- Callouts ---------------------------------------------------------------
+.callout {
+  border-radius: 10px;
+  border-width: 1px;
+  border-left-width: 4px;
+}
+
+// ---------------------------------------------------------------------------
+// Landing-page hero + feature grid
+// ---------------------------------------------------------------------------
+.hero {
+  margin: -0.5rem 0 2.5rem;
+  padding: 2.4rem 2rem 2.6rem;
+  border-radius: 18px;
+  background:
+    radial-gradient(1100px 380px at 12% -10%, rgba(106, 92, 240, 0.14), transparent 60%),
+    radial-gradient(900px 360px at 100% 0%, rgba(14, 159, 110, 0.10), transparent 55%),
+    linear-gradient(180deg, #fbfbff 0%, #f6f5ff 100%);
+  border: 1px solid #ecebfa;
+}
+.hero .hero-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5145e0;
+  background: rgba(81, 69, 224, 0.10);
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+.hero .hero-title {
+  font-size: 2.5rem !important;
+  line-height: 1.08;
+  margin: 0 0 0.7rem !important;
+  border: none !important;
+  background: linear-gradient(90deg, #16192a 0%, #4b40cf 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero .hero-subtitle {
+  font-size: 1.12rem !important;
+  color: #4a4f66;
+  max-width: 40rem;
+  margin: 0 0 1.6rem !important;
+}
+.hero .hero-cta { margin-top: 0.4rem; }
+.hero .hero-cta .btn { margin: 0 0.5rem 0.5rem 0; }
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0 2.5rem;
+}
+.feature {
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem;
+  background: #fff;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease, transform 0.08s ease;
+}
+.feature:hover {
+  border-color: #d9d5fb;
+  box-shadow: 0 6px 18px rgba(81, 69, 224, 0.10);
+  transform: translateY(-2px);
+}
+.feature .feature-ico { font-size: 1.35rem; }
+.feature h3 { margin: 0.4rem 0 0.3rem !important; font-size: 1rem !important; }
+.feature p { margin: 0 !important; font-size: 0.9rem; color: #5c6070; max-width: none; }
+
+// ---------------------------------------------------------------------------
+// Light / dark toggle button (injected into the top aux-nav)
+// ---------------------------------------------------------------------------
+.color-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; // fill the header height so the icon centers like the aux links
+  color: #5145e0; // matches the light-mode accent (same as the aux links)
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  margin-left: 0.1rem;
+  border-radius: 8px;
+  line-height: 0;
+}
+.color-mode-toggle:hover { background: rgba(81, 69, 224, 0.10); }
+.color-mode-toggle .cm-ico { display: block; }
+.color-mode-toggle--floating {
+  position: fixed;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 1000;
+  background: rgba(127, 127, 160, 0.12);
+}
+
+// ---------------------------------------------------------------------------
+// Dark mode — applies when the toggle script sets html[data-color-mode="dark"].
+// The theme base (bg / sidebar / text / links) comes from the gravity-dark
+// scheme; these rules re-tune the custom components for dark backgrounds.
+// ---------------------------------------------------------------------------
+html[data-color-mode="dark"] {
+  .hero {
+    background:
+      radial-gradient(1100px 380px at 12% -10%, rgba(106, 92, 240, 0.24), transparent 60%),
+      radial-gradient(900px 360px at 100% 0%, rgba(14, 159, 110, 0.14), transparent 55%),
+      linear-gradient(180deg, #191926 0%, #15151f 100%);
+    border-color: #2b2b3b;
+  }
+  .hero .hero-title {
+    background: linear-gradient(90deg, #ffffff 0%, #9e94ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero .hero-subtitle { color: #b9bbcb; }
+  .hero .hero-eyebrow { color: #b3a9ff; background: rgba(129, 116, 255, 0.18); }
+
+  .feature { background: #1a1a24; border-color: #2a2a38; }
+  .feature:hover { border-color: #3a3568; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45); }
+  .feature p { color: #a7a9bb; }
+
+  .main-content code {
+    color: #c7c1ff;
+    background-color: #23213a;
+    border-color: #332f52;
+  }
+  .main-content pre.highlight,
+  .main-content div.highlighter-rouge { border-color: #2a2a38; }
+
+  .main-content table { box-shadow: 0 0 0 1px #2a2a38; }
+  .main-content thead th { background-color: #20202b; border-bottom-color: #2a2a38; }
+  .main-content td, .main-content th { border-bottom-color: #2a2a38; }
+
+  .nav-list .nav-list-item .nav-list-link:hover { background-color: rgba(129, 116, 255, 0.12); }
+  .nav-list .nav-list-item .nav-list-link.active { background-color: rgba(129, 116, 255, 0.18); }
+
+  // The default logo has a near-black wordmark; swap to the light variant.
+  .site-logo {
+    background-image: url("/easypaydirect-mcp/assets/images/logo-dark.svg?v=2");
+  }
+
+  .color-mode-toggle { color: #9e94ff; } // matches the dark-mode accent
+  .color-mode-toggle:hover { background: rgba(129, 116, 255, 0.16); }
+}

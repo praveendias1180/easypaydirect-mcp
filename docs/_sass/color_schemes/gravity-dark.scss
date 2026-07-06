@@ -1,0 +1,22 @@
+// Gravity brand — dark scheme. Layered on top of the light base, so we set the
+// full dark palette here (plus the indigo accent).
+$color-scheme: dark;
+
+$body-background-color:        #14141d;
+$body-heading-color:           #f3f3f9;
+$body-text-color:              #c3c5d4;
+$link-color:                   #9e94ff;
+$nav-child-link-color:         #b6b8c8;
+$sidebar-color:                #17171f;
+$base-button-color:            #23232f;
+$btn-primary-color:            #6a5cf0;
+$code-background-color:        #11111a;
+$code-linenumber-color:        #8a8fa3;
+$feedback-color:               #1b1b26;
+$table-background-color:       #1a1a24;
+$search-background-color:      #1a1a24;
+$search-result-preview-color:  #c3c5d4;
+$border-color:                 #2a2a37;
+
+// Dark syntax highlighting to match.
+@import "vendor/accessible-pygments/github-dark";

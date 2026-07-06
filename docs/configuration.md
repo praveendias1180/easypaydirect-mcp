@@ -41,7 +41,7 @@ NMI_API_URL=https://secure.yourgateway.com
 ## Where to put these
 
 - **Claude Desktop / Claude Code:** in the `env` block of the MCP server entry
-  (see [getting-started.md](getting-started.md)).
+  (see [getting-started.md](getting-started.html)).
 - **Local development:** copy `.env.example` to `.env` and export them, or pass
   them inline on the command line. `.env` is git-ignored.
 

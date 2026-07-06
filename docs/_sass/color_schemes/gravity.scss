@@ -1,0 +1,19 @@
+// Gravity brand color scheme for the easypaydirect-mcp docs site.
+// Overrides sit on top of just-the-docs' light base scheme.
+
+$link-color:              #5145e0;
+$btn-primary-color:       #5145e0;
+$nav-child-link-color:    #5c6070;
+
+$body-heading-color:      #16192a;
+$body-text-color:         #3b4055;
+$body-background-color:   #ffffff;
+$sidebar-color:           #fafaff;
+$search-background-color:  #ffffff;
+$table-background-color:   #ffffff;
+$feedback-color:          darken($sidebar-color, 3%);
+
+$border-color:            #ececf4;
+
+$code-background-color:    #f6f7fb;
+$code-linenumber-color:    #b7bacb;

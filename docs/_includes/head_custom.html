@@ -1,0 +1,92 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="{{ '/assets/images/favicon.svg' | relative_url }}" type="image/svg+xml">
+<meta name="theme-color" content="#5145e0">
+
+<script>
+  // Light / dark theme — defaults to the OS setting; a toggle in the top nav
+  // lets visitors override it (persisted in localStorage). Swaps the main
+  // stylesheet between just-the-docs-default.css (light) and
+  // just-the-docs-gravity-dark.css (dark).
+  (function () {
+    var KEY = 'epd-color-mode';
+    var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+    // Monochrome icons that inherit the button's color via currentColor.
+    var SUN = '<svg class="cm-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.4 4.4l1.6 1.6M18 18l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.4 19.6l1.6-1.6M18 6l1.6-1.6"/></svg>';
+    var MOON = '<svg class="cm-ico" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.5 14.8A8.2 8.2 0 019.2 3.5 7.3 7.3 0 1020.5 14.8z"/></svg>';
+
+    function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function resolve() {
+      var s = saved();
+      if (s === 'light' || s === 'dark') return s;
+      return mq && mq.matches ? 'dark' : 'light';
+    }
+    function mainLink() {
+      var links = document.querySelectorAll('link[rel="stylesheet"]');
+      for (var i = 0; i < links.length; i++) {
+        if (links[i].id === 'jtd-head-nav-stylesheet') continue;
+        if (/just-the-docs-(default|gravity-dark)\.css/.test(links[i].getAttribute('href') || '')) return links[i];
+      }
+      return null;
+    }
+    function apply(mode) {
+      var l = mainLink();
+      if (l) {
+        var file = mode === 'dark' ? 'just-the-docs-gravity-dark.css' : 'just-the-docs-default.css';
+        l.setAttribute('href', (l.getAttribute('href') || '').replace(/just-the-docs-(default|gravity-dark)\.css/, file));
+      }
+      document.documentElement.setAttribute('data-color-mode', mode);
+    }
+    function current() { return document.documentElement.getAttribute('data-color-mode') || 'light'; }
+    // Show the icon for the mode you'd switch TO: sun while dark, moon while light.
+    function icon(mode) { return mode === 'dark' ? SUN : MOON; }
+
+    // Apply before the body paints to avoid a flash.
+    apply(resolve());
+
+    function addToggle() {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'color-mode-toggle';
+      btn.setAttribute('aria-label', 'Toggle light / dark theme');
+      btn.title = 'Toggle light / dark theme';
+      btn.innerHTML = icon(current());
+      btn.addEventListener('click', function () {
+        var next = current() === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        apply(next);
+        btn.innerHTML = icon(next);
+      });
+      var aux = document.querySelector('.aux-nav-list');
+      if (aux) {
+        var li = document.createElement('li');
+        li.className = 'aux-nav-list-item';
+        li.appendChild(btn);
+        aux.appendChild(li);
+      } else {
+        btn.classList.add('color-mode-toggle--floating');
+        document.body.appendChild(btn);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', addToggle);
+    } else {
+      addToggle();
+    }
+
+    // Follow OS changes unless the visitor picked a preference explicitly.
+    if (mq) {
+      var handler = function (e) {
+        if (saved() === 'light' || saved() === 'dark') return;
+        var m = e.matches ? 'dark' : 'light';
+        apply(m);
+        var b = document.querySelector('.color-mode-toggle');
+        if (b) b.innerHTML = icon(m);
+      };
+      if (mq.addEventListener) mq.addEventListener('change', handler);
+      else if (mq.addListener) mq.addListener(handler);
+    }
+  })();
+</script>

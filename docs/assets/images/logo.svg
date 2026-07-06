@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236 40" width="236" height="40" role="img" aria-label="easypaydirect-mcp">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6a5cf0"/>
+      <stop offset="1" stop-color="#4b40cf"/>
+    </linearGradient>
+  </defs>
+  <rect width="40" height="40" rx="10" fill="url(#lg)"/>
+  <rect x="8" y="13" width="24" height="16" rx="2.5" fill="#ffffff"/>
+  <rect x="8" y="16.5" width="24" height="3" fill="#cbc6f6"/>
+  <circle cx="26" cy="25" r="5" fill="#ffffff" stroke="#4b40cf" stroke-width="2"/>
+  <line x1="29.5" y1="28.5" x2="33.5" y2="32.5" stroke="#4b40cf" stroke-width="2" stroke-linecap="round"/>
+  <text x="52" y="26.5" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700" fill="#16192a">easypaydirect<tspan fill="#5145e0">-mcp</tspan></text>
+</svg>

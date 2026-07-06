@@ -10,7 +10,7 @@ This guide takes you from zero to asking Claude questions about your gateway dat
 ## 1. Prerequisites
 
 - **Node.js 18 or newer** (`node --version`).
-- A **security key** for your EPD / NMI gateway. A **read-only** key is strongly recommended — see [configuration.md](configuration.md).
+- A **security key** for your EPD / NMI gateway. A **read-only** key is strongly recommended — see [configuration.md](configuration.html).
 
 ## 2. Get your credentials
 
