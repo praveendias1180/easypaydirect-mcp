@@ -1,3 +1,8 @@
+---
+title: Tools reference
+nav_order: 4
+---
+
 # Tools reference
 
 Every tool is **read-only** and returns the parsed Query API response as

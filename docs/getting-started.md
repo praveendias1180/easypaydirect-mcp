@@ -1,3 +1,8 @@
+---
+title: Getting started
+nav_order: 2
+---
+
 # Getting started
 
 This guide takes you from zero to asking Claude questions about your gateway data.

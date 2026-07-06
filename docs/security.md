@@ -1,3 +1,8 @@
+---
+title: Security
+nav_order: 5
+---
+
 # Security
 
 This server handles a payment-gateway credential and exposes financial data to

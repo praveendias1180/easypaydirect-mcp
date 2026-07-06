@@ -1,3 +1,8 @@
+---
+title: Architecture & API mapping
+nav_order: 6
+---
+
 # Architecture & Query API mapping
 
 ## Overview

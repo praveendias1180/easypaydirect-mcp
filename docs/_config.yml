@@ -1,0 +1,22 @@
+title: easypaydirect-mcp
+description: >-
+  Read-only Model Context Protocol (MCP) server for the Easy Pay Direct (EPD) /
+  NMI-family payment gateway Query API.
+remote_theme: just-the-docs/just-the-docs@v0.12.0
+url: https://praveendias1180.github.io
+baseurl: /easypaydirect-mcp
+color_scheme: light
+search_enabled: true
+heading_anchors: true
+plugins:
+  - jekyll-remote-theme
+aux_links:
+  "GitHub ↗":
+    - https://github.com/praveendias1180/easypaydirect-mcp
+  "npm ↗":
+    - https://www.npmjs.com/package/easypaydirect-mcp
+aux_links_new_tab: true
+# The repo README, LICENSE etc. live above this folder and aren't part of the site.
+exclude:
+  - Gemfile
+  - Gemfile.lock

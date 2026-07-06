@@ -1,3 +1,8 @@
+---
+title: Configuration
+nav_order: 3
+---
+
 # Configuration
 
 All configuration is via environment variables. Nothing is read from disk, and
