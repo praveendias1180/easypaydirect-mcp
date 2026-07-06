@@ -106,6 +106,21 @@ npx @modelcontextprotocol/inspector node dist/index.js
 
 Architecture and how tools map to the Query API: [`docs/nmi-api-mapping.md`](docs/nmi-api-mapping.md).
 
+## Roadmap
+
+Planned / under consideration — contributions welcome (see [open issues](https://github.com/praveendias1180/easypaydirect-mcp/issues)):
+
+- **Tests** — unit suite with recorded Query API fixtures ([#1](https://github.com/praveendias1180/easypaydirect-mcp/issues/1))
+- **Friendlier dates** — accept ISO-8601 in date filters ([#2](https://github.com/praveendias1180/easypaydirect-mcp/issues/2))
+- **More filters** — merchant-defined fields on `search_transactions` ([#3](https://github.com/praveendias1180/easypaydirect-mcp/issues/3))
+- **Better errors** — map NMI response codes to actionable messages ([#4](https://github.com/praveendias1180/easypaydirect-mcp/issues/4))
+- **Distribution** — a Docker image ([#7](https://github.com/praveendias1180/easypaydirect-mcp/issues/7)) and publish-on-release automation ([#8](https://github.com/praveendias1180/easypaydirect-mcp/issues/8))
+- **Docs** — response-field reference ([#9](https://github.com/praveendias1180/easypaydirect-mcp/issues/9))
+
+Read-only stays the default posture — any write support would be a separate, opt-in, gated **major** version.
+
+See the [changelog](CHANGELOG.md) for released changes.
+
 ## Contributing
 
 Contributions are welcome — this aims to be a small, dependable, **read-only** MCP server. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the ground rules and dev setup.
