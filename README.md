@@ -1,5 +1,9 @@
 # easypaydirect-mcp
 
+[![npm](https://img.shields.io/npm/v/easypaydirect-mcp.svg)](https://www.npmjs.com/package/easypaydirect-mcp)
+[![CI](https://github.com/praveendias1180/easypaydirect-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/praveendias1180/easypaydirect-mcp/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/npm/l/easypaydirect-mcp.svg)](LICENSE)
+
 > **Unofficial, read-only [Model Context Protocol](https://modelcontextprotocol.io) server for the [Easy Pay Direct](https://easypaydirect.com) (EPD) / NMI-family payment gateway.**
 
 Give an AI assistant (Claude Desktop, Claude Code, or any MCP client) safe, **read-only** access to your gateway's transactions, subscriptions, recurring plans, and Customer Vault records — so you can ask questions like *"find the failed transactions for this customer last week"* or *"is this subscription still active?"* in plain language.
