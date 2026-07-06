@@ -2,7 +2,10 @@
 
 [![npm](https://img.shields.io/npm/v/easypaydirect-mcp.svg)](https://www.npmjs.com/package/easypaydirect-mcp)
 [![CI](https://github.com/praveendias1180/easypaydirect-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/praveendias1180/easypaydirect-mcp/actions/workflows/ci.yml)
+[![docs](https://img.shields.io/badge/docs-online-1f6feb.svg)](https://praveendias1180.github.io/easypaydirect-mcp/)
 [![license: MIT](https://img.shields.io/npm/l/easypaydirect-mcp.svg)](LICENSE)
+
+📖 **Documentation:** <https://praveendias1180.github.io/easypaydirect-mcp/>
 
 > **Unofficial, read-only [Model Context Protocol](https://modelcontextprotocol.io) server for the [Easy Pay Direct](https://easypaydirect.com) (EPD) / NMI-family payment gateway.**
 
