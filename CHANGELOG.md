@@ -6,8 +6,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.1] — 2026-07-06
+
 ### Added
 - MCP client setup examples for Cursor, Windsurf, and VS Code ([#6](https://github.com/praveendias1180/easypaydirect-mcp/pull/6))
+- Listed on the official [MCP Registry](https://registry.modelcontextprotocol.io) (`server.json` + `mcpName`)
 
 ## [0.1.0] — 2026-07-06
 
@@ -17,5 +20,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Configurable gateway host via `NMI_API_URL` — works with any NMI white-label gateway.
 - Documentation site, security policy, and CI.
 
-[Unreleased]: https://github.com/praveendias1180/easypaydirect-mcp/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/praveendias1180/easypaydirect-mcp/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/praveendias1180/easypaydirect-mcp/releases/tag/v0.1.1
 [0.1.0]: https://github.com/praveendias1180/easypaydirect-mcp/releases/tag/v0.1.0
