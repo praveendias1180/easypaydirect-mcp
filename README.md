@@ -3,6 +3,7 @@
 [![npm](https://img.shields.io/npm/v/easypaydirect-mcp.svg)](https://www.npmjs.com/package/easypaydirect-mcp)
 [![CI](https://github.com/praveendias1180/easypaydirect-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/praveendias1180/easypaydirect-mcp/actions/workflows/ci.yml)
 [![docs](https://img.shields.io/badge/docs-online-1f6feb.svg)](https://praveendias1180.github.io/easypaydirect-mcp/)
+[![good first issues](https://img.shields.io/github/issues/praveendias1180/easypaydirect-mcp/good%20first%20issue?color=7057ff&label=good%20first%20issues)](https://github.com/praveendias1180/easypaydirect-mcp/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
 [![license: MIT](https://img.shields.io/npm/l/easypaydirect-mcp.svg)](LICENSE)
 
 📖 **Documentation:** <https://praveendias1180.github.io/easypaydirect-mcp/>
@@ -104,6 +105,12 @@ npx @modelcontextprotocol/inspector node dist/index.js
 ```
 
 Architecture and how tools map to the Query API: [`docs/nmi-api-mapping.md`](docs/nmi-api-mapping.md).
+
+## Contributing
+
+Contributions are welcome — this aims to be a small, dependable, **read-only** MCP server. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the ground rules and dev setup.
+
+**New here?** Start with a [**good first issue**](https://github.com/praveendias1180/easypaydirect-mcp/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) — each one has context, a task checklist, file pointers, and acceptance criteria. Have a question? Open a [Discussion](https://github.com/praveendias1180/easypaydirect-mcp/discussions).
 
 ## License
 
