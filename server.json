@@ -1,0 +1,34 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.praveendias1180/easypaydirect-mcp",
+  "description": "Read-only MCP server for the Easy Pay Direct (EPD) / NMI-family payment gateway Query API.",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/praveendias1180/easypaydirect-mcp",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "easypaydirect-mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "NMI_SECURITY_KEY",
+          "description": "Gateway API security key (a read-only key is recommended).",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "NMI_API_URL",
+          "description": "Gateway API base URL; defaults to https://secure.nmi.com. Set to your EPD / white-label host.",
+          "isRequired": false
+        }
+      ]
+    }
+  ]
+}

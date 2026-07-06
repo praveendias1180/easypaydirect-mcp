@@ -1,5 +1,6 @@
 {
   "name": "easypaydirect-mcp",
+  "mcpName": "io.github.praveendias1180/easypaydirect-mcp",
   "version": "0.1.0",
   "description": "Unofficial read-only Model Context Protocol (MCP) server for the Easy Pay Direct (EPD) / NMI-family payment gateway Query API.",
   "type": "module",
