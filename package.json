@@ -1,0 +1,53 @@
+{
+  "name": "easypaydirect-mcp",
+  "version": "0.1.0",
+  "description": "Unofficial read-only Model Context Protocol (MCP) server for the Easy Pay Direct (EPD) / NMI-family payment gateway Query API.",
+  "type": "module",
+  "bin": {
+    "easypaydirect-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('dist/index.js', 0o755)\"",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "nmi",
+    "easypaydirect",
+    "epd",
+    "payments",
+    "payment-gateway",
+    "claude",
+    "ai"
+  ],
+  "author": "Praveen Dias (https://github.com/praveendias1180)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/praveendias1180/easypaydirect-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/praveendias1180/easypaydirect-mcp/issues"
+  },
+  "homepage": "https://github.com/praveendias1180/easypaydirect-mcp#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "fast-xml-parser": "^5.9.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}
