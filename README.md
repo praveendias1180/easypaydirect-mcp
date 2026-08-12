@@ -48,6 +48,14 @@ Build the Docker image from the repository root:
 docker build -t easypaydirect-mcp .
 ```
 
+## without env file passing variables from CLI
+
+```bash
+docker run --rm -i \                                
+  -e NMI_SECURITY_KEY="YOUR_READ_ONLY_SECURITY_KEY" \
+  -e NMI_API_URL="https://secure.nmi.com" \
+  easypaydirect-mcp
+```
 For Docker, you can provide the required environment variables using a `.env` file.
 
 Create a `.env` file in the project directory:
