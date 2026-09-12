@@ -1,8 +1,14 @@
 # easypaydirect-mcp
 
+[![npm](https://img.shields.io/npm/v/easypaydirect-mcp.svg)](https://www.npmjs.com/package/easypaydirect-mcp)
+[![CI](https://github.com/praveendias1180/easypaydirect-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/praveendias1180/easypaydirect-mcp/actions/workflows/ci.yml)
+[![docs](https://img.shields.io/badge/docs-online-1f6feb.svg)](https://praveendias1180.github.io/easypaydirect-mcp/)
+[![good first issues](https://img.shields.io/github/issues/praveendias1180/easypaydirect-mcp/good%20first%20issue?color=7057ff&label=good%20first%20issues)](https://github.com/praveendias1180/easypaydirect-mcp/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
+[![license: MIT](https://img.shields.io/npm/l/easypaydirect-mcp.svg)](LICENSE)
+
 📖 **Documentation:** https://praveendias1180.github.io/easypaydirect-mcp/
 
-> **Unofficial, read-only** **[Model Context Protocol](https://modelcontextprotocol.io)** **server for the** **[Easy Pay Direct](https://easypaydirect.com)** **(EPD) / NMI-family payment gateway.**
+> **Unofficial, read-only [Model Context Protocol](https://modelcontextprotocol.io) server for the [Easy Pay Direct](https://easypaydirect.com) (EPD) / NMI-family payment gateway.**
 
 Give an AI assistant (Claude Desktop, Claude Code, or any MCP client) safe, **read-only** access to your gateway's transactions, subscriptions, recurring plans, and Customer Vault records — so you can ask questions like *"find the failed transactions for this customer last week"* or *"is this subscription still active?"* in plain language.
 
@@ -14,7 +20,7 @@ Easy Pay Direct is built on the **NMI / Network Merchants** gateway platform, so
 
 ## Why read-only?
 
-This server talks **only** to the gateway's [Query API](https://docs.nmi.com/reference/query) (`/api/query.php`) — the reporting endpoint. It has **no code path** to the transaction endpoint (`transact.php`), so it **cannot** charge a card, issue a refund, void a transaction, or modify the vault. An LLM connected to this server can look, but it cannot touch money. See `docs/security.md`.
+This server talks **only** to the gateway's [Query API](https://docs.nmi.com/reference/query) (`/api/query.php`) — the reporting endpoint. It has **no code path** to the transaction endpoint (`transact.php`), so it **cannot** charge a card, issue a refund, void a transaction, or modify the vault. An LLM connected to this server can look, but it cannot touch money. See [`docs/security.md`](docs/security.md).
 
 Write operations may arrive in a future major version — always **opt-in, off by default, and loudly gated**.
 
@@ -36,7 +42,7 @@ The server speaks MCP over **stdio** and expects two environment variables:
 | `NMI_SECURITY_KEY` | ✅        | Your gateway API **security key** (a **read-only** key is recommended). Merchant portal → Settings → Security Keys. |
 | `NMI_API_URL`      | —        | Gateway API base URL. Defaults to `https://secure.nmi.com`. For EPD/white-labels, set this to your gateway's host.  |
 
-See `docs/configuration.md` for how to find your key and host.
+See [`docs/configuration.md`](docs/configuration.md) for how to find your key and host.
 
 ## Run with Docker
 
@@ -48,14 +54,15 @@ Build the Docker image from the repository root:
 docker build -t easypaydirect-mcp .
 ```
 
-## without env file passing variables from CLI
+### Passing variables from the CLI (without an env file)
 
 ```bash
-docker run --rm -i \                                
+docker run --rm -i \
   -e NMI_SECURITY_KEY="YOUR_READ_ONLY_SECURITY_KEY" \
   -e NMI_API_URL="https://secure.nmi.com" \
   easypaydirect-mcp
 ```
+
 For Docker, you can provide the required environment variables using a `.env` file.
 
 Create a `.env` file in the project directory:
@@ -111,7 +118,7 @@ You should see `easypaydirect` listed as an MCP server.
 
 ## Connect it to Claude
 
-**Claude Desktop** — add to `claude_desktop_config.json` (see `examples/claude-desktop-config.json`):
+**Claude Desktop** — add to `claude_desktop_config.json` (see [`examples/claude-desktop-config.json`](examples/claude-desktop-config.json)):
 
 ```json
 {
@@ -146,11 +153,11 @@ claude mcp add easypaydirect \
   easypaydirect-mcp
 ```
 
-Full walkthrough: `docs/getting-started.md`.
+Full walkthrough: [`docs/getting-started.md`](docs/getting-started.md).
 
 ## Tools
 
-All tools are **read-only**. Full reference in `docs/tools.md`.
+All tools are **read-only**. Full reference in [`docs/tools.md`](docs/tools.md).
 
 | Tool                        | What it does                                                                                                 |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -178,7 +185,7 @@ Local run against the MCP Inspector:
 npx @modelcontextprotocol/inspector node dist/index.js
 ```
 
-Architecture and how tools map to the Query API: `docs/nmi-api-mapping.md`.
+Architecture and how tools map to the Query API: [`docs/nmi-api-mapping.md`](docs/nmi-api-mapping.md).
 
 ## Roadmap
 
@@ -197,7 +204,7 @@ See the [changelog](CHANGELOG.md) for released changes.
 
 ## Contributing
 
-Contributions are welcome — this aims to be a small, dependable, **read-only** MCP server. See `CONTRIBUTING.md` for the ground rules and dev setup.
+Contributions are welcome — this aims to be a small, dependable, **read-only** MCP server. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the ground rules and dev setup.
 
 **New here?** Start with a [**good first issue**](https://github.com/praveendias1180/easypaydirect-mcp/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) — each one has context, a task checklist, file pointers, and acceptance criteria. Have a question? Open a [Discussion](https://github.com/praveendias1180/easypaydirect-mcp/discussions).
 
