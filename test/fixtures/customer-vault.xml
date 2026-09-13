@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nm_response>
+  <customer_vault>
+    <customer id="3000000001">
+      <customer_vault_id>3000000001</customer_vault_id>
+      <first_name>Alex</first_name>
+      <last_name>Example</last_name>
+      <email>alex@example.com</email>
+      <cc_number>4xxxxxxxxxxx1111</cc_number>
+      <cc_exp>1230</cc_exp>
+    </customer>
+  </customer_vault>
+</nm_response>

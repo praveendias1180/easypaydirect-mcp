@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nm_response>
+  <transaction>
+    <transaction_id>1000000001</transaction_id>
+    <transaction_type>cc</transaction_type>
+    <condition>complete</condition>
+    <order_id>ORDER-1001</order_id>
+    <email>alex@example.com</email>
+    <action>
+      <amount>49.00</amount>
+      <action_type>sale</action_type>
+      <response_code>100</response_code>
+    </action>
+  </transaction>
+  <transaction>
+    <transaction_id>1000000002</transaction_id>
+    <transaction_type>ck</transaction_type>
+    <condition>pendingsettlement</condition>
+    <order_id>ORDER-1002</order_id>
+    <email>sam@example.com</email>
+    <action>
+      <amount>19.99</amount>
+      <action_type>sale</action_type>
+      <response_code>100</response_code>
+    </action>
+    <action>
+      <amount>19.99</amount>
+      <action_type>refund</action_type>
+      <response_code>100</response_code>
+    </action>
+  </transaction>
+</nm_response>

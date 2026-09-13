@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nm_response>
+  <subscription>
+    <subscription_id>2000000001</subscription_id>
+    <plan>
+      <plan_id>PLAN-10</plan_id>
+      <plan_name>Example Monthly</plan_name>
+      <plan_amount>29.00</plan_amount>
+      <plan_payments>0</plan_payments>
+      <day_frequency>30</day_frequency>
+    </plan>
+    <first_name>Alex</first_name>
+    <last_name>Example</last_name>
+    <email>alex@example.com</email>
+    <next_charge_date>20260201</next_charge_date>
+    <completed_payments>3</completed_payments>
+  </subscription>
+</nm_response>
