@@ -1,0 +1,67 @@
+name: Bug report
+description: Something in easypaydirect-mcp isn't working as documented.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this!
+
+        ⚠️ **Never paste a real security key, token, or customer data** (names, emails, card details, transaction IDs from a live account). Redact or use made-up values.
+        Found a security issue? Please **don't** file it here — use a [private security advisory](https://github.com/praveendias1180/easypaydirect-mcp/security/advisories/new) instead.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: dropdown
+    id: tool
+    attributes:
+      label: Which tool?
+      options:
+        - get_transaction
+        - search_transactions
+        - get_subscription
+        - list_subscriptions
+        - list_recurring_plans
+        - get_customer_vault_record
+        - list_customer_vault
+        - Not tool-specific (startup, config, install, Docker)
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The tool arguments you used and the error text you got (redacted).
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: easypaydirect-mcp version
+      placeholder: e.g. 0.1.1 (see `npm ls easypaydirect-mcp`)
+    validations:
+      required: true
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: How are you running it?
+      options:
+        - npx
+        - Docker
+        - From source (node dist/index.js)
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: MCP client and Node version
+      placeholder: e.g. Claude Desktop 1.2, Node 20.11
+  - type: input
+    id: gateway
+    attributes:
+      label: Gateway
+      description: NMI directly, Easy Pay Direct, or another NMI white-label? (Host name is fine; no keys.)
+      placeholder: e.g. Easy Pay Direct
