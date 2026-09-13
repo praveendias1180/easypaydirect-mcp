@@ -3,6 +3,21 @@
 Thanks for your interest! This project aims to be a small, dependable,
 **read-only** MCP server for the EPD / NMI Query API.
 
+## Your first contribution
+
+New to open source? You're very welcome here.
+
+1. Pick an issue labelled [`good first issue`](https://github.com/praveendias1180/easypaydirect-mcp/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) and leave a comment saying you're taking it, so two people don't build the same thing.
+2. Fork the repo, create a branch, and follow **Dev setup** below.
+3. Open a pull request — the template has a short checklist. Small, focused PRs get reviewed fastest.
+4. Stuck or unsure about an approach? Ask on the issue or in [Discussions](https://github.com/praveendias1180/easypaydirect-mcp/discussions). Questions are never a bother.
+
+The repo ships an [`.editorconfig`](.editorconfig); please make sure your editor
+respects it and **doesn't reformat lines you didn't change** — unrelated
+formatting changes make a PR much harder to review.
+
+Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ## Ground rules
 
 - **Read-only.** Pull requests that add charge/refund/void/subscription-write or

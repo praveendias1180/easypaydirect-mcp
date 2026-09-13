@@ -1,0 +1,35 @@
+name: Feature request
+description: Suggest a new read-only tool, filter, or improvement.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This project is **read-only by design** — it only calls the Query API and never charges, refunds, voids, or changes subscriptions. Requests for write support are out of scope for the `0.x` line (see [CONTRIBUTING.md](https://github.com/praveendias1180/easypaydirect-mcp/blob/main/CONTRIBUTING.md#ground-rules)).
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The question you want to answer or the task you want an AI assistant to help with.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: A new tool, a new filter on an existing tool, a docs change… If you know the Query API parameter involved, mention it.
+    validations:
+      required: true
+  - type: checkboxes
+    id: read-only
+    attributes:
+      label: Read-only check
+      options:
+        - label: This only reads data from the Query API — it doesn't create, change, or delete anything.
+          required: true
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Want to build it?
+      options:
+        - label: I'd like to open a PR for this myself.
