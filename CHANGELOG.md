@@ -6,6 +6,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- **Claude Code plugin** bundling the MCP server with an **Agent Skill** (`plugins/easypaydirect/skills/easypaydirect/SKILL.md`) that teaches Claude which tool to use and how to read gateway data correctly — ACH settlement, UTC dates, deleted subscriptions, multiple vault records, manual collections. Install with `/plugin marketplace add praveendias1180/easypaydirect-mcp`.
+
 ## [0.1.2] — 2026-09-12
 
 ### Added

@@ -57,7 +57,8 @@ jobs:
             const pkg = require("./package.json");
             const srv = require("./server.json");
             const found = { "package.json": pkg.version, "server.json version": srv.version,
-              "server.json packages[0].version": srv.packages[0].version };
+              "server.json packages[0].version": srv.packages[0].version,
+              "plugin.json version": require("./plugins/easypaydirect/.claude-plugin/plugin.json").version };
             const bad = Object.entries(found).filter(([, x]) => x !== v);
             if (bad.length) {
               for (const [where, x] of bad) console.error(`::error::${where} is ${x}, but the tag is v${v}`);
