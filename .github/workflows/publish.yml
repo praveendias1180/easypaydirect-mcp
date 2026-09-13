@@ -1,0 +1,104 @@
+name: Publish
+
+# Publishing a GitHub Release (tag vX.Y.Z) publishes that version to npm and
+# the MCP Registry. No tokens or secrets: npm uses Trusted Publishing and the
+# registry uses GitHub OIDC, both keyed to this workflow file.
+#
+# Safe to re-run: each step skips a target that already has the version.
+# Use "Run workflow" with a tag to retry a release that failed part-way.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to publish, e.g. v0.1.2"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+env:
+  MCP_PUBLISHER_VERSION: v1.8.1
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # npm Trusted Publishing + MCP Registry OIDC login
+    env:
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+          registry-url: https://registry.npmjs.org
+
+      # Trusted Publishing needs npm 11.5.1 or newer.
+      - run: npm install -g npm@^11.5.1
+
+      - name: Check the tag matches package.json and server.json
+        id: version
+        run: |
+          VERSION="${TAG#v}"
+          node -e '
+            const v = process.argv[1];
+            const pkg = require("./package.json");
+            const srv = require("./server.json");
+            const found = { "package.json": pkg.version, "server.json version": srv.version,
+              "server.json packages[0].version": srv.packages[0].version };
+            const bad = Object.entries(found).filter(([, x]) => x !== v);
+            if (bad.length) {
+              for (const [where, x] of bad) console.error(`::error::${where} is ${x}, but the tag is v${v}`);
+              process.exit(1);
+            }
+          ' "$VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+
+      - name: Publish to npm
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          NAME=$(node -p 'require("./package.json").name')
+          if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+            echo "$NAME@$VERSION is already on npm, skipping."
+          else
+            npm publish --access public
+          fi
+
+      - name: Publish to the MCP Registry
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          NAME=$(node -p 'require("./server.json").name')
+          if curl -fsS "https://registry.modelcontextprotocol.io/v0/servers?search=$NAME&version=$VERSION" \
+              | node -e '
+                  const [name, version] = process.argv.slice(1);
+                  let s = ""; process.stdin.on("data", d => s += d).on("end", () => {
+                    const hit = (JSON.parse(s).servers || [])
+                      .some(e => e.server.name === name && e.server.version === version);
+                    process.exit(hit ? 0 : 1);
+                  });
+                ' "$NAME" "$VERSION"; then
+            echo "$NAME $VERSION is already in the MCP Registry, skipping."
+            exit 0
+          fi
+          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/download/$MCP_PUBLISHER_VERSION/mcp-publisher_linux_amd64.tar.gz" \
+            | tar xz mcp-publisher
+          ./mcp-publisher login github-oidc
+          ./mcp-publisher publish
