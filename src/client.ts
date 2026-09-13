@@ -39,6 +39,8 @@ export class NmiClient {
     const body = new URLSearchParams();
     body.set("security_key", this.config.securityKey);
     for (const [key, value] of Object.entries(params)) {
+      // The configured key is the only one ever sent; a param can't replace it.
+      if (key === "security_key") continue;
       if (value !== undefined && value !== null && value !== "") {
         body.set(key, String(value));
       }

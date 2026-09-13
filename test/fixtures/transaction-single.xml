@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nm_response>
+  <transaction>
+    <transaction_id>1000000001</transaction_id>
+    <transaction_type>cc</transaction_type>
+    <condition>complete</condition>
+    <order_id>ORDER-1001</order_id>
+    <first_name>Alex</first_name>
+    <last_name>Example</last_name>
+    <email>alex@example.com</email>
+    <cc_number>4xxxxxxxxxxx1111</cc_number>
+    <action>
+      <amount>49.00</amount>
+      <action_type>sale</action_type>
+      <date>20260101120000</date>
+      <success>1</success>
+      <response_text>SUCCESS</response_text>
+      <response_code>100</response_code>
+    </action>
+  </transaction>
+</nm_response>

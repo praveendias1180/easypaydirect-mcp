@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nm_response>
+  <plan>
+    <plan_id>PLAN-10</plan_id>
+    <plan_name>Example Monthly</plan_name>
+    <plan_amount>29.00</plan_amount>
+    <plan_payments>0</plan_payments>
+    <month_frequency>1</month_frequency>
+    <day_of_month>1</day_of_month>
+  </plan>
+</nm_response>

@@ -33,7 +33,36 @@ Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 npm install
 npm run typecheck
 npm run build
+npm test
 ```
+
+## Running tests / adding a test
+
+Tests use [Vitest](https://vitest.dev) and live in `test/`. They never touch a
+real gateway: each test stubs `fetch` and replies with a **synthetic** fixture
+from `test/fixtures/`.
+
+```bash
+npm test             # run once
+npm run test:watch   # re-run on save
+```
+
+Most new tests are a few lines, using the helpers in `test/helpers.ts`:
+
+```ts
+it("forwards order_id", async () => {
+  const fetch = mockFetchOnce(loadFixture("transaction-single.xml")); // fake gateway reply
+  const client = await connectTools(registerTransactionTools);         // real MCP server, in memory
+
+  await client.callTool({ name: "search_transactions", arguments: { order_id: "ORDER-1001" } });
+
+  expect(sentRequest(fetch).params.get("order_id")).toBe("ORDER-1001"); // what we sent the gateway
+});
+```
+
+- `test/config.test.ts` / `test/client.test.ts` — config loading and the Query API client
+- `test/tools/<file>.test.ts` — one file per `src/tools/<file>.ts`; add your tool's test there
+- New fixtures must be **synthetic** — made-up IDs, `@example.com` emails, masked card numbers like `4xxxxxxxxxxx1111`
 
 Test against a real gateway with a **read-only** key using the MCP Inspector:
 
