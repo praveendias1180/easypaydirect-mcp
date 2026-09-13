@@ -29,6 +29,7 @@ env:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     permissions:
       contents: read
       id-token: write # npm Trusted Publishing + MCP Registry OIDC login
@@ -80,6 +81,24 @@ jobs:
           else
             npm publish --access public
           fi
+
+      # npm processes a new version for a few minutes before it can be
+      # installed, and the MCP Registry rejects a version npm doesn't serve yet.
+      - name: Wait for npm to serve the version
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          NAME=$(node -p 'require("./package.json").name')
+          for i in $(seq 1 60); do
+            if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+              echo "$NAME@$VERSION is available on npm."
+              exit 0
+            fi
+            echo "Waiting for npm to serve $NAME@$VERSION ($i/60)…"
+            sleep 20
+          done
+          echo "::error::$NAME@$VERSION still isn't available on npm after 20 minutes. Re-run this workflow with the tag once it is."
+          exit 1
 
       - name: Publish to the MCP Registry
         env:
