@@ -98,6 +98,26 @@ claude mcp add easypaydirect \
 
 Full walkthrough: [`docs/getting-started.md`](docs/getting-started.md).
 
+### Claude Code plugin (server + skill)
+
+The plugin installs the MCP server **and** an [Agent Skill](plugins/easypaydirect/skills/easypaydirect/SKILL.md)
+that teaches Claude how to read gateway data correctly — for example that a successful
+ACH sale is only *submitted*, not paid, and that EPD timestamps are UTC.
+
+Set the key in your shell (the plugin reads it from the environment), then install:
+
+```bash
+export NMI_SECURITY_KEY=your_read_only_security_key
+export NMI_API_URL=https://secure.nmi.com   # optional; your EPD / white-label host
+```
+
+```
+/plugin marketplace add praveendias1180/easypaydirect-mcp
+/plugin install easypaydirect@easypaydirect-mcp
+```
+
+Using another client? The skill is a plain `SKILL.md` — add it to any tool that supports Agent Skills.
+
 ## Tools
 
 All tools are **read-only**. Full reference in [`docs/tools.md`](docs/tools.md).

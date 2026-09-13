@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "easypaydirect": {
+      "command": "npx",
+      "args": ["-y", "easypaydirect-mcp"],
+      "env": {
+        "NMI_SECURITY_KEY": "${NMI_SECURITY_KEY}",
+        "NMI_API_URL": "${NMI_API_URL:-https://secure.nmi.com}"
+      }
+    }
+  }
+}

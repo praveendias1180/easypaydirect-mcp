@@ -1,0 +1,15 @@
+{
+  "name": "easypaydirect-mcp",
+  "description": "Read-only Easy Pay Direct / NMI payment gateway tools for Claude.",
+  "owner": {
+    "name": "praveendias1180",
+    "url": "https://github.com/praveendias1180"
+  },
+  "plugins": [
+    {
+      "name": "easypaydirect",
+      "source": "./plugins/easypaydirect",
+      "description": "Read-only Easy Pay Direct / NMI gateway tools plus a skill for reading payment data correctly."
+    }
+  ]
+}
