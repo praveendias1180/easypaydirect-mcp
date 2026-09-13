@@ -3,85 +3,68 @@
 How to cut a new release of `easypaydirect-mcp`. Maintainers only.
 
 Each release goes to three places: **npm**, the **MCP Registry**, and a **GitHub Release**.
-
-## Prerequisites (one-time)
-
-- **npm access** to the `easypaydirect-mcp` package.
-- **`mcp-publisher`** CLI — download the binary for your OS from the
-  [registry releases](https://github.com/modelcontextprotocol/registry/releases)
-  (e.g. `mcp-publisher_linux_amd64.tar.gz`), or `brew install mcp-publisher`.
-- **`gh`** CLI logged in as a GitHub account that owns the `io.github.<user>` namespace.
-- Keep the **`mcpName`** field in `package.json` — the MCP Registry uses it to verify
-  the npm package belongs to this server. Don't remove it.
+Publishing the GitHub Release triggers [`.github/workflows/publish.yml`](.github/workflows/publish.yml),
+which publishes to npm and the MCP Registry. **No tokens, no OTP, nothing to run locally.**
 
 ## Steps
 
-Replace `X.Y.Z` with the new version (semver).
+### 1. Prepare the release (in a PR)
 
-### 1. Bump the version
-
-Update the version in **both** files (keep them in sync):
-
-- `package.json` → `version`
-- `server.json` → top-level `version` **and** `packages[0].version`
-
-Add a `## [X.Y.Z]` section to `CHANGELOG.md` and update the compare links at the bottom.
-
-### 2. Commit + push
+Make sure `CHANGELOG.md` → `## [Unreleased]` lists the changes, then:
 
 ```bash
-git add package.json server.json CHANGELOG.md
-git commit -m "chore(release): X.Y.Z"
-git push origin main
+npm run release -- patch        # or minor | major | 0.2.0
 ```
 
-### 3. Publish to npm
+This bumps `package.json`, `package-lock.json` and both versions in `server.json`,
+and turns `[Unreleased]` into a dated `## [X.Y.Z]` section with compare links.
+It refuses to run if `[Unreleased]` is empty.
+
+Open a PR with the result (`chore(release): X.Y.Z`) and merge it once CI is green.
+
+### 2. Publish the GitHub Release
 
 ```bash
-npm publish --access public
+gh release create vX.Y.Z --target main --title "vX.Y.Z" \
+  --notes-file <(awk '/^## \[X.Y.Z\]/{f=1;next} /^## \[/{f=0} f' CHANGELOG.md)
 ```
 
-- Requires 2FA. Pass `--otp=<code>` if it doesn't prompt.
-- If you get `401 Unauthorized`, your token lapsed — re-login first:
-  `npm login --auth-type=legacy` (username / password / OTP), then publish.
-- The published package **must** contain `mcpName` (verify: `npm view easypaydirect-mcp@X.Y.Z mcpName`).
+(or **Releases → Draft a new release** in the GitHub UI, tag `vX.Y.Z` on `main`).
 
-### 4. Publish to the MCP Registry
+That's it. The **Publish** workflow then:
+
+1. checks the tag matches `package.json` and both `server.json` versions — fails loudly if not,
+2. runs typecheck, build and tests,
+3. publishes to **npm** with provenance, via [Trusted Publishing](https://docs.npmjs.com/trusted-publishers),
+4. publishes `server.json` to the **MCP Registry**, via GitHub OIDC.
+
+Watch it under **Actions → Publish**. Each publish step skips a target that
+already has the version, so if one fails part-way, fix the cause and use
+**Run workflow** with the tag to retry.
+
+### Verify
 
 ```bash
-# Authenticate (a gh CLI token works — no interactive device flow needed):
-mcp-publisher login github -token "$(gh auth token)"
-
-# Publish the manifest (reads ./server.json):
-mcp-publisher publish
+npm view easypaydirect-mcp@X.Y.Z version mcpName
+curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.praveendias1180/easypaydirect-mcp"
 ```
 
-Verify it's live:
+## One-time setup (already done — only needed if it's ever reset)
 
-```bash
-curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=easypaydirect-mcp"
-```
-
-### 5. Cut the GitHub Release
-
-```bash
-gh release create vX.Y.Z --title "vX.Y.Z" --notes "…release notes…"
-```
-
-Draw the notes from the new `CHANGELOG.md` section.
-
-## TL;DR (after the version bump + commit)
-
-```bash
-npm publish --access public
-mcp-publisher login github -token "$(gh auth token)"
-mcp-publisher publish
-gh release create vX.Y.Z --title "vX.Y.Z" --notes-file <(sed -n '/## \[X.Y.Z\]/,/## \[/p' CHANGELOG.md)
-```
+- **npm Trusted Publisher.** On npmjs.com → `easypaydirect-mcp` → **Settings** →
+  **Trusted Publisher** → **GitHub Actions**: owner `praveendias1180`, repository
+  `easypaydirect-mcp`, workflow filename `publish.yml`, environment blank.
+  Renaming the workflow file breaks publishing until this is updated.
+- **MCP Registry.** Nothing to configure: GitHub OIDC from this repo proves
+  ownership of the `io.github.praveendias1180/*` namespace.
+- Keep the **`mcpName`** field in `package.json` — the MCP Registry uses it to verify
+  the npm package belongs to this server. Don't remove it.
+- Keep `repository.url` in `package.json` pointing at this repo — Trusted Publishing
+  checks it.
 
 ## Notes
 
 - **Read-only stays the default.** Any write capability would be a separate, opt-in,
   gated **major** version — never a patch/minor.
-- Versions in `package.json`, `server.json`, and the npm/registry/GitHub release should
-  all match.
+- Versions in `package.json`, `server.json`, and the npm/registry/GitHub release must
+  all match; the workflow enforces it.
