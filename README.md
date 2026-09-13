@@ -6,7 +6,7 @@
 [![good first issues](https://img.shields.io/github/issues/praveendias1180/easypaydirect-mcp/good%20first%20issue?color=7057ff&label=good%20first%20issues)](https://github.com/praveendias1180/easypaydirect-mcp/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
 [![license: MIT](https://img.shields.io/npm/l/easypaydirect-mcp.svg)](LICENSE)
 
-📖 **Documentation:** https://praveendias1180.github.io/easypaydirect-mcp/
+📖 **Documentation:** <https://praveendias1180.github.io/easypaydirect-mcp/>
 
 > **Unofficial, read-only [Model Context Protocol](https://modelcontextprotocol.io) server for the [Easy Pay Direct](https://easypaydirect.com) (EPD) / NMI-family payment gateway.**
 
@@ -37,84 +37,27 @@ npx easypaydirect-mcp
 
 The server speaks MCP over **stdio** and expects two environment variables:
 
-| Variable           | Required | Description                                                                                                         |
-| ------------------ | -------- | ------------------------------------------------------------------------------------------------------------------- |
-| `NMI_SECURITY_KEY` | ✅        | Your gateway API **security key** (a **read-only** key is recommended). Merchant portal → Settings → Security Keys. |
-| `NMI_API_URL`      | —        | Gateway API base URL. Defaults to `https://secure.nmi.com`. For EPD/white-labels, set this to your gateway's host.  |
+| Variable | Required | Description |
+|---|---|---|
+| `NMI_SECURITY_KEY` | ✅ | Your gateway API **security key** (a **read-only** key is recommended). Merchant portal → Settings → Security Keys. |
+| `NMI_API_URL` | — | Gateway API base URL. Defaults to `https://secure.nmi.com`. For EPD/white-labels, set this to your gateway's host. |
 
 See [`docs/configuration.md`](docs/configuration.md) for how to find your key and host.
 
-## Run with Docker
+### Run with Docker
 
-You can run the MCP server in a Docker container without installing Node.js locally.
-
-Build the Docker image from the repository root:
+No local Node.js needed. Build the image from the repository root, then run it with `-i` — MCP talks over stdio, so the container needs stdin kept open:
 
 ```bash
 docker build -t easypaydirect-mcp .
-```
 
-### Passing variables from the CLI (without an env file)
-
-```bash
 docker run --rm -i \
-  -e NMI_SECURITY_KEY="YOUR_READ_ONLY_SECURITY_KEY" \
-  -e NMI_API_URL="https://secure.nmi.com" \
+  -e NMI_SECURITY_KEY=your_read_only_security_key \
+  -e NMI_API_URL=https://secure.nmi.com \
   easypaydirect-mcp
 ```
 
-For Docker, you can provide the required environment variables using a `.env` file.
-
-Create a `.env` file in the project directory:
-
-```env
-NMI_SECURITY_KEY=your_read_only_security_key
-NMI_API_URL=https://secure.nmi.com
-```
-
-Then start the server:
-
-```bash
-docker run --rm -i \
-  --env-file .env \
-  easypaydirect-mcp
-```
-
-The server communicates using MCP over **stdio**. The `-i` flag is required so Docker keeps stdin open and the MCP client can communicate with the container.
-
-The `.env` file should contain your actual security key but **must not be committed to source control**. Add `.env` to `.gitignore`.
-
-For example, a safe `.env.example` can contain:
-
-```env
-NMI_SECURITY_KEY=
-NMI_API_URL=https://secure.nmi.com
-```
-
-### Connect Docker to Claude Code
-
-Claude Code can use the Dockerized server directly as an MCP stdio server.
-
-If your `.env` file is in the project directory, use its absolute path:
-
-```bash
-claude mcp add easypaydirect \
-  -- docker run --rm -i \
-  --env-file /absolute/path/to/easypaydirect-mcp/.env \
-  easypaydirect-mcp
-```
-
-The `-i` flag is required because the MCP server communicates with Claude Code over **stdio**.
-
-After adding the server, verify the configuration:
-
-```bash
-claude mcp list
-```
-
-You should see `easypaydirect` listed as an MCP server.
-
-> **Note:** Keep your `.env` file private and never commit real gateway security keys to the repository.
+Or keep the variables in an env file (`--env-file .env`). `.env` is already git-ignored — never commit a real key.
 
 ## Connect it to Claude
 
@@ -144,13 +87,13 @@ claude mcp add easypaydirect \
   -- npx -y easypaydirect-mcp
 ```
 
-**Claude Code with Docker:**
+To use the Docker image instead, swap the command — a bare `-e NAME` forwards the variable into the container:
 
 ```bash
 claude mcp add easypaydirect \
-  -- docker run --rm -i \
-  --env-file /absolute/path/to/.env \
-  easypaydirect-mcp
+  -e NMI_SECURITY_KEY=your_read_only_security_key \
+  -e NMI_API_URL=https://secure.nmi.com \
+  -- docker run --rm -i -e NMI_SECURITY_KEY -e NMI_API_URL easypaydirect-mcp
 ```
 
 Full walkthrough: [`docs/getting-started.md`](docs/getting-started.md).
@@ -159,15 +102,15 @@ Full walkthrough: [`docs/getting-started.md`](docs/getting-started.md).
 
 All tools are **read-only**. Full reference in [`docs/tools.md`](docs/tools.md).
 
-| Tool                        | What it does                                                                                                 |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `get_transaction`           | Fetch one transaction by gateway transaction ID.                                                             |
-| `search_transactions`       | Search transactions by date range + filters (condition, action type, payment type, source, email, order id). |
-| `get_subscription`          | Fetch one recurring subscription by ID.                                                                      |
-| `list_subscriptions`        | List recurring subscriptions, optionally by created/updated date range.                                      |
-| `list_recurring_plans`      | List recurring billing plans (or one by `plan_id`).                                                          |
-| `get_customer_vault_record` | Fetch one stored Customer Vault record by ID.                                                                |
-| `list_customer_vault`       | List stored Customer Vault records, optionally by date range.                                                |
+| Tool | What it does |
+|---|---|
+| `get_transaction` | Fetch one transaction by gateway transaction ID. |
+| `search_transactions` | Search transactions by date range + filters (condition, action type, payment type, source, email, order id). |
+| `get_subscription` | Fetch one recurring subscription by ID. |
+| `list_subscriptions` | List recurring subscriptions, optionally by created/updated date range. |
+| `list_recurring_plans` | List recurring billing plans (or one by `plan_id`). |
+| `get_customer_vault_record` | Fetch one stored Customer Vault record by ID. |
+| `list_customer_vault` | List stored Customer Vault records, optionally by date range. |
 
 ## Develop
 
@@ -191,12 +134,12 @@ Architecture and how tools map to the Query API: [`docs/nmi-api-mapping.md`](doc
 
 Planned / under consideration — contributions welcome (see [open issues](https://github.com/praveendias1180/easypaydirect-mcp/issues)):
 
-* **Tests** — unit suite with recorded Query API fixtures ([#1](https://github.com/praveendias1180/easypaydirect-mcp/issues/1))
-* **Friendlier dates** — accept ISO-8601 in date filters ([#2](https://github.com/praveendias1180/easypaydirect-mcp/issues/2))
-* **More filters** — merchant-defined fields on `search_transactions` ([#3](https://github.com/praveendias1180/easypaydirect-mcp/issues/3))
-* **Better errors** — map NMI response codes to actionable messages ([#4](https://github.com/praveendias1180/easypaydirect-mcp/issues/4))
-* **Distribution** — a Docker image ([#7](https://github.com/praveendias1180/easypaydirect-mcp/issues/7)) and publish-on-release automation ([#8](https://github.com/praveendias1180/easypaydirect-mcp/issues/8))
-* **Docs** — response-field reference ([#9](https://github.com/praveendias1180/easypaydirect-mcp/issues/9))
+- **Tests** — unit suite with recorded Query API fixtures ([#1](https://github.com/praveendias1180/easypaydirect-mcp/issues/1))
+- **Friendlier dates** — accept ISO-8601 in date filters ([#2](https://github.com/praveendias1180/easypaydirect-mcp/issues/2))
+- **More filters** — merchant-defined fields on `search_transactions` ([#3](https://github.com/praveendias1180/easypaydirect-mcp/issues/3))
+- **Better errors** — map NMI response codes to actionable messages ([#4](https://github.com/praveendias1180/easypaydirect-mcp/issues/4))
+- **Distribution** — publish-on-release automation ([#8](https://github.com/praveendias1180/easypaydirect-mcp/issues/8))
+- **Docs** — response-field reference ([#9](https://github.com/praveendias1180/easypaydirect-mcp/issues/9))
 
 Read-only stays the default posture — any write support would be a separate, opt-in, gated **major** version.
 
