@@ -1,7 +1,7 @@
 {
   "name": "easypaydirect",
   "description": "Read-only Easy Pay Direct / NMI gateway access for Claude: the easypaydirect-mcp server plus a skill that teaches Claude to read payment data correctly (ACH settlement, UTC dates, subscriptions, vault).",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": {
     "name": "praveendias1180",
     "url": "https://github.com/praveendias1180"
@@ -9,5 +9,11 @@
   "homepage": "https://praveendias1180.github.io/easypaydirect-mcp/",
   "repository": "https://github.com/praveendias1180/easypaydirect-mcp",
   "license": "MIT",
-  "keywords": ["mcp", "payments", "nmi", "easypaydirect", "read-only"]
+  "keywords": [
+    "mcp",
+    "payments",
+    "nmi",
+    "easypaydirect",
+    "read-only"
+  ]
 }
