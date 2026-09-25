@@ -1,8 +1,3 @@
----
-title: Architecture & API mapping
-nav_order: 6
----
-
 # Architecture & Query API mapping
 
 ## Overview
@@ -55,10 +50,10 @@ precision).
    model knows how to use it.
 3. Map inputs to Query API params and call `client.query(...)`.
 4. Register it in `src/index.ts`.
-5. Document it in [`tools.md`](tools.html) and here.
+5. Document it in [`tools.md`](tools.md) and here.
 
 Keep new tools **read-only** (Query API only). Write support is a deliberate,
-separately gated future effort — see [`security.md`](security.html).
+separately gated future effort — see [`security.md`](security.md).
 
 ## Reference
 
