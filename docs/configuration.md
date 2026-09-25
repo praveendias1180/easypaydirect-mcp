@@ -1,8 +1,3 @@
----
-title: Configuration
-nav_order: 3
----
-
 # Configuration
 
 All configuration is via environment variables. Nothing is read from disk, and
@@ -41,7 +36,7 @@ NMI_API_URL=https://secure.yourgateway.com
 ## Where to put these
 
 - **Claude Desktop / Claude Code:** in the `env` block of the MCP server entry
-  (see [getting-started.md](getting-started.html)).
+  (see [getting-started.md](getting-started.md)).
 - **Local development:** copy `.env.example` to `.env` and export them, or pass
   them inline on the command line. `.env` is git-ignored.
 
